@@ -11,7 +11,7 @@ jobs:
       # Docker run
       - run: "apk add --update --no-cache docker && \
               docker build --tag=ghr-alpine:edge . && \
-              case "$( docker run --rm -ti ghr-alpine:edge ghr -v )" in \
-                  "ghr version "*) echo 'passed';; \
-                  *)               echo 'failed' && return 1;; \
-              esac
+              case \"$( docker run --rm -ti ghr-alpine:edge ghr -v )\" in \
+                  \"ghr version \"*) echo 'passed';; \
+                  *)                 echo 'failed' && return 1;; \
+              esac"
