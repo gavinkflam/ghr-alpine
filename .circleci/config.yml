@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/ghr-alpine
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - setup_remote_docker
+      # Install Docker client, build an edge image and test for binary via
+      # Docker run
+      - run: "apk add --update --no-cache docker && \
+              docker build --tag=ghr-alpine:edge . && \
+              case "$( docker run --rm -ti ghr-alpine:edge ghr -v )" in \
+                  "ghr version "*) echo 'passed';; \
+                  *)               echo 'failed' && return 1;; \
+              esac
