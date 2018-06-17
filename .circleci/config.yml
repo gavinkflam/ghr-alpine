@@ -14,6 +14,6 @@ jobs:
               result=\"$( docker run --rm -ti ghr-alpine:edge ghr -v )\" && \
               echo \"${result}\" && \
               case \"${result}\" in \
-                  \"ghr version \"*) echo 'passed';; \
-                  *)                 echo 'failed' && return 1;; \
+                  *\"ghr version \"*) echo 'passed';; \
+                  *)                  echo 'failed' && return 1;; \
               esac"
